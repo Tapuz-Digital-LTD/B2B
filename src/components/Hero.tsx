@@ -1,4 +1,6 @@
 import PhoneMockup from './PhoneMockup'
+import ScaleStage from './ScaleStage'
+import CtaButton from './CtaButton'
 
 type MiniCardProps = {
   img: string
@@ -111,7 +113,7 @@ function Floats() {
 export default function Hero() {
   return (
     <section className="flex flex-col items-center px-[12px] pt-[68px] lg:px-[24px]">
-      <div className="relative h-[700px] w-full overflow-clip rounded-[24px] border border-primary/15 bg-primary/12">
+      <div className="relative h-[700px] w-full overflow-clip rounded-[24px] border border-primary/15 bg-primary/12 lg:h-auto">
         {/* plus pattern at the bottom */}
         <div className="xtra-pattern pointer-events-none absolute inset-x-0 bottom-0 h-[296px]" />
 
@@ -133,60 +135,58 @@ export default function Hero() {
               לא עוד שובר ששוכחים במייל. הארנק של XTRA הוא המקום שבו המתנות שלכם הופכות לחוויות בלתי נשכחות, עם חופש
               בחירה מוחלט ושקט נפשי למעסיק.
             </p>
-            <button className="cursor-pointer rounded-full bg-primary px-[16px] py-[6px] text-[15px] font-bold uppercase leading-[26px] tracking-[0.46px] text-white">
+            <CtaButton className="cursor-pointer rounded-full bg-primary px-[16px] py-[6px] text-[15px] font-bold uppercase leading-[26px] tracking-[0.46px] text-white">
               אני רוצה לתת XTRA
-            </button>
+            </CtaButton>
           </div>
           <div dir="ltr" className="relative mt-[16px] min-h-px w-full flex-1">
-            <div className="absolute left-1/2 top-[8px] h-[604px] w-[278px] -translate-x-1/2">
-              <div className="origin-top-left scale-[0.6033]">
-                <PhoneMockup />
+            <div className="relative mx-auto h-full w-full max-w-[400px]">
+              <div className="absolute left-1/2 top-[8px] h-[604px] w-[278px] -translate-x-1/2">
+                <div className="origin-top-left scale-[0.6033]">
+                  <PhoneMockup />
+                </div>
               </div>
+              <Floats />
             </div>
-            <Floats />
           </div>
         </div>
 
-        {/* ===== desktop layout ===== */}
-        <div className="hidden h-full lg:block">
-          {/* text block — right half; items-start = the right edge in RTL */}
-          <div className="absolute left-[calc(50%+95px)] top-1/2 flex w-[640px] -translate-y-1/2 flex-col items-start justify-center gap-[28px] pe-[40px] xl:left-auto xl:right-[85px] [&>*]:animate-fade-up [&>*:nth-child(2)]:[animation-delay:150ms] [&>*:nth-child(3)]:[animation-delay:300ms]">
-            <div className="flex flex-col items-start justify-center gap-[14px]">
-              <div className="flex items-center justify-center gap-[12px]">
-                <p
-                  className="whitespace-nowrap text-right text-[44px] font-bold leading-[1.167] tracking-[-1px] text-primary xl:text-[54px]"
-                  dir="auto"
-                >
-                  מרגישים שנתת
+        {/* ===== desktop layout — fixed 1872x700 composition, scaled to any width ===== */}
+        <ScaleStage designWidth={1872} designHeight={700} className="hidden w-full lg:block">
+          <div className="relative h-[700px] w-[1872px]">
+            {/* text block — right half; items-start = the right edge in RTL */}
+            <div className="absolute right-[85px] top-1/2 flex w-[640px] -translate-y-1/2 flex-col items-start justify-center gap-[28px] [&>*]:animate-fade-up [&>*:nth-child(2)]:[animation-delay:150ms] [&>*:nth-child(3)]:[animation-delay:300ms]">
+              <div className="flex flex-col items-start justify-center gap-[14px]">
+                <div className="flex items-center justify-center gap-[12px]">
+                  <p className="whitespace-nowrap text-right text-[54px] font-bold leading-[1.167] tracking-[-1px] text-primary" dir="auto">
+                    מרגישים שנתת
+                  </p>
+                  <img src="/figma/xtra-logo-full.svg" alt="XTRA." className="h-[38px] w-auto" />
+                </div>
+                <p className="whitespace-nowrap text-right text-[54px] font-bold leading-[1.167] tracking-[-1px] text-text-main" dir="auto">
+                  הכירו את הארנק הדיגיטלי
                 </p>
-                <img src="/figma/xtra-logo-full.svg" alt="XTRA." className="h-[32px] w-auto xl:h-[38px]" />
               </div>
-              <p
-                className="whitespace-nowrap text-right text-[44px] font-bold leading-[1.167] tracking-[-1px] text-text-main xl:text-[54px]"
-                dir="auto"
-              >
-                הכירו את הארנק הדיגיטלי
+              <p className="w-[560px] text-right text-[30px] leading-[1.15] text-text-main" dir="auto">
+                לא עוד שובר ששוכחים במייל. הארנק של XTRA הוא המקום שבו המתנות שלכם הופכות לחוויות בלתי נשכחות, עם חופש
+                בחירה מוחלט ושקט נפשי למעסיק.
               </p>
+              <CtaButton className="cursor-pointer rounded-full bg-primary px-[28px] py-[14px] text-[18px] font-bold leading-[1.167] text-white transition-transform hover:scale-105">
+                אני רוצה לתת XTRA
+              </CtaButton>
             </div>
-            <p className="w-[540px] text-right text-[26px] leading-[1.15] text-text-main xl:text-[30px]" dir="auto">
-              לא עוד שובר ששוכחים במייל. הארנק של XTRA הוא המקום שבו המתנות שלכם הופכות לחוויות בלתי נשכחות, עם חופש
-              בחירה מוחלט ושקט נפשי למעסיק.
-            </p>
-            <button className="cursor-pointer rounded-full bg-primary px-[28px] py-[14px] text-[18px] font-bold leading-[1.167] text-white transition-transform hover:scale-105">
-              אני רוצה לתת XTRA
-            </button>
-          </div>
 
-          {/* image container — left half */}
-          <div dir="ltr" className="absolute -left-px -top-px h-[700px] w-[1017px] overflow-clip rounded-[22px]">
-            <div className="absolute left-1/2 top-[65px] -translate-x-1/2">
-              <div className="animate-fade-up">
-                <PhoneMockup />
+            {/* image container — left half */}
+            <div dir="ltr" className="absolute -left-px -top-px h-[700px] w-[1017px] overflow-clip rounded-[22px]">
+              <div className="absolute left-1/2 top-[65px] -translate-x-1/2">
+                <div className="animate-fade-up">
+                  <PhoneMockup />
+                </div>
               </div>
+              <Floats />
             </div>
-            <Floats />
           </div>
-        </div>
+        </ScaleStage>
       </div>
     </section>
   )

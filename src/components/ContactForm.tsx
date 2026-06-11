@@ -5,10 +5,11 @@ const inputClass =
 
 export default function ContactForm() {
   return (
-    <section className="bg-primary/8 px-[24px] py-[80px] lg:py-[120px]">
+    <section id="leads-form" className="scroll-mt-[68px] bg-primary/8 px-[24px] py-[80px] lg:py-[120px]">
       <div className="mx-auto flex w-full max-w-[600px] flex-col items-center gap-[40px] lg:gap-[60px]">
         <Reveal className="flex flex-col items-center gap-[16px]">
-          <div className="flex flex-wrap items-center justify-center gap-x-[12px] gap-y-[8px] lg:gap-[16px]">
+          {/* items-baseline: the logo bottom sits on the text baseline */}
+          <div className="flex flex-wrap items-baseline justify-center gap-x-[12px] gap-y-[8px] lg:gap-[16px]">
             <p className="text-[30px] font-bold leading-[1.167] text-sub-black lg:text-[46px]" dir="auto">
               רוצים לתת
             </p>
@@ -26,7 +27,8 @@ export default function ContactForm() {
           <div className="flex flex-col gap-[8px] lg:gap-[14px]">
             <input className={inputClass} type="text" name="fullName" placeholder="שם מלא*" required />
             <div className="flex flex-col gap-[8px] lg:flex-row lg:gap-[14px]">
-              <input className={inputClass} type="tel" name="phone" placeholder="טלפון נייד*" required />
+              {/* tel inputs default to LTR — force RTL so the placeholder aligns right like the rest */}
+              <input className={`${inputClass} text-right`} dir="rtl" type="tel" name="phone" placeholder="טלפון נייד*" required />
               <input className={inputClass} type="email" name="email" placeholder="כתובת מייל בעבודה*" required />
             </div>
             <input className={inputClass} type="text" name="company" placeholder="שם החברה" />

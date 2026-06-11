@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import Reveal from './Reveal'
+import ScaleStage from './ScaleStage'
+import CtaButton from './CtaButton'
 
 const CARD_DURATION_MS = 3500
 
 /** Rotating gift-card designs inside the floating card (crossfade). */
-function GiftCardRotator() {
+export function GiftCardRotator() {
   const [card, setCard] = useState(0)
 
   useEffect(() => {
@@ -91,37 +93,59 @@ function TileGrid() {
   )
 }
 
+function BrandsText() {
+  return (
+    <Reveal className="flex flex-col items-center gap-[24px] text-center lg:items-start lg:gap-[32px] lg:text-right">
+      <div className="flex flex-col items-center gap-[16px] lg:items-start">
+        <p className="text-[20px] font-bold leading-[1.167] text-primary" dir="auto">
+          עולם של אפשרויות
+        </p>
+        <h2 className="text-[32px] font-bold leading-[1.167] text-sub-black lg:text-[46px]" dir="rtl">
+          כל המותגים הכי
+          <br />
+          {'אהובים, '}
+          <span className="text-primary">בארנק אחד.</span>
+        </h2>
+      </div>
+      <p className="text-[20px] leading-[1.15] text-sub-black lg:text-[28px]" dir="auto">
+        ממוצרי חשמל ועד חופשות בחו"ל, הארנק
+        <br />
+        של XTRA פותח דלת ל־3,500+ אפשרויות
+      </p>
+      <CtaButton className="cursor-pointer rounded-full bg-primary px-[28px] py-[14px] text-[18px] font-bold leading-[1.167] text-white transition-transform hover:scale-105">
+        לכל בתי העסק
+      </CtaButton>
+    </Reveal>
+  )
+}
+
 export default function Brands() {
   return (
-    <section className="relative flex flex-col items-center gap-[60px] px-[24px] py-[40px] lg:flex-row lg:justify-between lg:gap-[100px] lg:px-[200px] lg:py-[140px]">
+    <section className="relative px-[24px] py-[40px] lg:px-[200px] lg:py-[100px]">
       <div className="bg-blob-pink pointer-events-none absolute -top-[350px] left-[53%] -z-10 h-[1030px] w-[1415px] max-w-none" />
       <div className="bg-blob-blue pointer-events-none absolute -bottom-[150px] -left-[750px] -z-10 h-[1600px] w-[1950px] max-w-none" />
 
-      <Reveal className="flex flex-col items-center gap-[24px] text-center lg:items-start lg:gap-[32px] lg:text-right">
-        <div className="flex flex-col items-center gap-[16px] lg:items-start">
-          <p className="text-[20px] font-bold leading-[1.167] text-primary" dir="auto">
-            עולם של אפשרויות
-          </p>
-          <h2 className="text-[32px] font-bold leading-[1.167] text-sub-black lg:text-[46px]" dir="rtl">
-            כל המותגים הכי
-            <br />
-            {'אהובים, '}
-            <span className="text-primary">בארנק אחד.</span>
-          </h2>
-        </div>
-        <p className="text-[20px] leading-[1.15] text-sub-black lg:text-[28px]" dir="auto">
-          ממוצרי חשמל ועד חופשות בחו"ל, הארנק
-          <br />
-          של XTRA פותח דלת ל־3,500+ אפשרויות
-        </p>
-        <button className="cursor-pointer rounded-full bg-primary px-[28px] py-[14px] text-[18px] font-bold leading-[1.167] text-white transition-transform hover:scale-105">
-          לכל בתי העסק
-        </button>
-      </Reveal>
+      {/* mobile — stacked */}
+      <div className="flex flex-col items-center gap-[60px] lg:hidden">
+        <BrandsText />
+        <Reveal delay={150} className="w-full min-w-px">
+          <TileGrid />
+        </Reveal>
+      </div>
 
-      <Reveal delay={150} className="w-full min-w-px lg:flex-1">
-        <TileGrid />
-      </Reveal>
+      {/* desktop — fixed 1520x540 composition, scaled to any width */}
+      <ScaleStage designWidth={1520} designHeight={540} className="hidden w-full lg:block">
+        <div className="relative h-[540px] w-[1520px]">
+          <div className="absolute right-0 top-1/2 -translate-y-1/2">
+            <BrandsText />
+          </div>
+          <div className="absolute left-0 top-0 w-[760px]">
+            <Reveal delay={150}>
+              <TileGrid />
+            </Reveal>
+          </div>
+        </div>
+      </ScaleStage>
     </section>
   )
 }

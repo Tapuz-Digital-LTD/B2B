@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Reveal from './Reveal'
+import ScaleStage from './ScaleStage'
 
 const STEP_DURATION_MS = 3500
 
@@ -24,7 +25,7 @@ const steps = [
   },
 ]
 
-function Step({ step, active }: { step: (typeof steps)[number]; active: boolean }) {
+function Step({ step, active, mobile }: { step: (typeof steps)[number]; active: boolean; mobile?: boolean }) {
   return (
     <div
       className={`relative flex w-full items-center justify-end overflow-visible rounded-[16px] transition-all duration-500 ${
@@ -40,7 +41,7 @@ function Step({ step, active }: { step: (typeof steps)[number]; active: boolean 
       >
         {/* font size stays constant on mobile so the stack height never changes */}
         <p
-          className={`w-full text-[20px] font-bold leading-[1.167] transition-all duration-500 ${active ? 'lg:text-[24px]' : ''}`}
+          className={`w-full text-[20px] font-bold leading-[1.167] transition-all duration-500 ${active && !mobile ? 'text-[24px]' : ''}`}
           dir="rtl"
         >
           {step.title}
@@ -56,13 +57,13 @@ function Step({ step, active }: { step: (typeof steps)[number]; active: boolean 
       </div>
       <div
         className={`flex shrink-0 items-center justify-center overflow-clip transition-all duration-500 ${
-          active ? 'size-[56px] rounded-[12px] bg-primary/8 lg:size-[80px]' : 'size-[40px] rounded-[6px] bg-white/24'
+          active ? `${mobile ? 'size-[56px]' : 'size-[80px]'} rounded-[12px] bg-primary/8` : 'size-[40px] rounded-[6px] bg-white/24'
         }`}
       >
         <img
           src={active ? step.iconActive : step.icon}
           alt=""
-          className={`transition-all duration-500 ${active ? 'size-[30px] lg:size-[40px]' : 'size-[24px]'}`}
+          className={`transition-all duration-500 ${active ? (mobile ? 'size-[30px]' : 'size-[40px]') : 'size-[24px]'}`}
         />
       </div>
       {/* progress rail next to the active step */}
@@ -80,6 +81,55 @@ function Step({ step, active }: { step: (typeof steps)[number]; active: boolean 
   )
 }
 
+/** hand holding the phone with the app demo video clipped to the bezel */
+function PhoneInHand() {
+  return (
+    <>
+      <img
+        src="/figma/sys-hand.png"
+        alt=""
+        className="absolute -left-[80px] top-[calc(50%+74px)] w-[840px] max-w-none -translate-y-1/2"
+      />
+      <div className="absolute left-[347px] top-[calc(50%-93px)] h-[664px] w-[356px] -translate-y-1/2">
+        <img src="/figma/sys-iphone.png" alt="" className="absolute inset-0 size-full" />
+        {/* app demo — drop the real clip at public/videos/app-demo.mp4; falls back to the poster frame.
+            Clipped with the exact screen mask exported from Figma so it sits inside the bezel. */}
+        <div
+          className="absolute left-[7.1px] top-[5.9px] h-[647.7px] w-[337.7px]"
+          style={{
+            WebkitMaskImage: 'url(/figma/sys-screen-mask.svg)',
+            maskImage: 'url(/figma/sys-screen-mask.svg)',
+            WebkitMaskRepeat: 'no-repeat',
+            maskRepeat: 'no-repeat',
+            WebkitMaskSize: '333.675px 643.987px',
+            maskSize: '333.675px 643.987px',
+            WebkitMaskPosition: '3.537px 1.422px',
+            maskPosition: '3.537px 1.422px',
+          }}
+        >
+          {/* the mockup photo is tilted ~2° clockwise — rotate the video to match the bezel */}
+          <video className="size-full rotate-[2deg] scale-[1.07] object-cover" autoPlay muted loop playsInline poster="/figma/sys-screen.png">
+            <source src="/videos/app-demo.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </>
+  )
+}
+
+function TitleBlock() {
+  return (
+    <div className="flex flex-col items-center gap-[16px] text-center text-white lg:items-start lg:text-right">
+      <p className="text-[20px] font-bold leading-[1.167]" dir="auto">
+        3 קליקים ונתת אקסטרה
+      </p>
+      <h2 className="text-[32px] font-bold leading-[1.167] lg:text-[46px]" dir="auto">
+        איך זה עובד?
+      </h2>
+    </div>
+  )
+}
+
 export default function HowItWorks() {
   const [active, setActive] = useState(0)
 
@@ -93,73 +143,51 @@ export default function HowItWorks() {
       <div className="bg-blob-pink pointer-events-none absolute left-[55%] top-[400px] -z-10 h-[1200px] w-[1470px] max-w-none" />
       <div className="bg-blob-blue pointer-events-none absolute -bottom-[500px] -left-[600px] -z-10 h-[1600px] w-[1990px] max-w-none" />
 
-      <div className="relative w-full overflow-clip rounded-[24px] border-[8px] border-white/80 bg-primary lg:h-[700px] lg:overflow-visible lg:rounded-[40px] lg:border-[12px]">
-        {/* text + steps — right side */}
-        <div className="relative z-10 flex flex-col gap-[40px] px-[24px] py-[40px] lg:absolute lg:left-auto lg:right-[108px] lg:top-1/2 lg:w-[560px] lg:-translate-y-1/2 lg:px-0 lg:py-0">
+      {/* ===== mobile ===== */}
+      <div className="relative w-full overflow-clip rounded-[24px] border-[8px] border-white/80 bg-primary lg:hidden">
+        <div className="relative z-10 flex flex-col gap-[40px] px-[24px] py-[40px]">
           <Reveal>
-            <div className="flex flex-col items-center gap-[16px] text-center text-white lg:items-start lg:text-right">
-              <p className="text-[20px] font-bold leading-[1.167]" dir="auto">
-                3 קליקים ונתת אקסטרה
-              </p>
-              <h2 className="text-[32px] font-bold leading-[1.167] lg:text-[46px]" dir="auto">
-                איך זה עובד?
-              </h2>
-            </div>
+            <TitleBlock />
           </Reveal>
-
           <Reveal delay={150}>
             {/* min-height reserves the tallest state so the section never jumps */}
-            <div className="flex min-h-[280px] w-full flex-col items-end gap-[12px] ps-[8px] lg:min-h-0">
+            <div className="flex min-h-[280px] w-full flex-col items-end gap-[12px] ps-[8px]">
               {steps.map((step, i) => (
-                <Step key={step.title} step={step} active={i === active} />
+                <Step key={step.title} step={step} active={i === active} mobile />
               ))}
             </div>
           </Reveal>
         </div>
+        <div dir="ltr" className="relative h-[440px] w-full overflow-clip">
+          <div className="absolute left-1/2 top-0 h-[850px] w-[760px] origin-top -translate-x-1/2 scale-[0.55]">
+            <PhoneInHand />
+          </div>
+        </div>
+      </div>
 
-        {/* hand + phone — left side (desktop), bottom (mobile) */}
-        <div
-          dir="ltr"
-          className="relative h-[440px] w-full overflow-clip lg:absolute lg:-top-[162px] lg:left-[12px] lg:h-[850px] lg:w-[760px] lg:rounded-bl-[28px]"
-        >
-          <div className="absolute left-1/2 top-0 h-[850px] w-[760px] origin-top -translate-x-1/2 scale-[0.55] lg:static lg:translate-x-0 lg:scale-100">
-            <img
-              src="/figma/sys-hand.png"
-              alt=""
-              className="absolute -left-[80px] top-[calc(50%+74px)] w-[840px] max-w-none -translate-y-1/2"
-            />
-            <div className="absolute left-[347px] top-[calc(50%-93px)] h-[664px] w-[356px] -translate-y-1/2">
-              <img src="/figma/sys-iphone.png" alt="" className="absolute inset-0 size-full" />
-              {/* app demo — drop the real clip at public/videos/app-demo.mp4; falls back to the poster frame.
-                  Clipped with the exact screen mask exported from Figma so it sits inside the bezel. */}
-              <div
-                className="absolute left-[7.1px] top-[5.9px] h-[647.7px] w-[337.7px]"
-                style={{
-                  WebkitMaskImage: 'url(/figma/sys-screen-mask.svg)',
-                  maskImage: 'url(/figma/sys-screen-mask.svg)',
-                  WebkitMaskRepeat: 'no-repeat',
-                  maskRepeat: 'no-repeat',
-                  WebkitMaskSize: '333.675px 643.987px',
-                  maskSize: '333.675px 643.987px',
-                  WebkitMaskPosition: '3.537px 1.422px',
-                  maskPosition: '3.537px 1.422px',
-                }}
-              >
-                {/* the mockup photo is tilted ~2° clockwise — rotate the video to match the bezel */}
-                <video
-                  className="size-full rotate-[2deg] scale-[1.07] object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="/figma/sys-screen.png"
-                >
-                  <source src="/videos/app-demo.mp4" type="video/mp4" />
-                </video>
+      {/* ===== desktop — fixed 1496x676 composition, scaled to any width ===== */}
+      <div className="relative hidden w-full rounded-[40px] border-[12px] border-white/80 bg-primary lg:block">
+        <ScaleStage designWidth={1496} designHeight={676} className="w-full">
+          <div className="relative h-[676px] w-[1496px]">
+            <div className="absolute right-[96px] top-1/2 z-10 flex w-[560px] -translate-y-1/2 flex-col gap-[40px]">
+              <Reveal>
+                <TitleBlock />
+              </Reveal>
+              <Reveal delay={150}>
+                <div className="flex w-full flex-col items-end gap-[12px] ps-[8px]">
+                  {steps.map((step, i) => (
+                    <Step key={step.title} step={step} active={i === active} />
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+            <div dir="ltr" className="absolute -top-[162px] left-0 h-[850px] w-[760px] overflow-clip rounded-bl-[28px]">
+              <div className="relative h-[850px] w-[760px]">
+                <PhoneInHand />
               </div>
             </div>
           </div>
-        </div>
+        </ScaleStage>
       </div>
     </section>
   )
