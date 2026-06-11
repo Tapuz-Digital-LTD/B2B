@@ -57,44 +57,63 @@ function BlobVideo() {
   )
 }
 
+/** Text column — shared by the mobile flow and the desktop canvas. */
+function AboutText() {
+  return (
+    <Reveal className="z-10 flex w-full max-w-[600px] flex-col items-center justify-center gap-[28px] lg:gap-[32px]">
+      <div className="flex w-full flex-col items-center justify-center gap-[24px] text-center text-sub-black lg:gap-[32px]">
+        <h2 className="text-[30px] font-bold leading-[1.167] lg:text-[46px]" dir="rtl">
+          אנחנו הופכים כל אירוע
+          <br />
+          בארגון <span className="text-primary">לחוויה מיוחדת</span>
+        </h2>
+        <p className="text-[18px] leading-[1.25] lg:text-[22px]" dir="rtl">
+          <b>המטרה שלנו פשוטה: </b>
+          להעניק לעובדים שלכם חופש בחירה מוחלט מתוך אלפי מותגים ומתנות בכל רחבי הארץ. ב-Xtra תוכלו לשלוח מתנות
+          בלחיצת כפתור, לנהל תקציבים וליהנות מתזמון שליחה מראש. אנחנו כאן כדי לוודא שכל אחת ואחד בארגון ייהנו מהמתנה
+          שנתתם, ושאתם תיהנו משקט נפשי וליווי מקצועי צמוד.
+        </p>
+      </div>
+      <div className="flex flex-col items-center gap-[16px] py-[16px] lg:flex-row lg:gap-[24px] lg:py-[24px]">
+        {infoItems.map((item, i) => (
+          <span key={item} className="flex flex-col items-center gap-[16px] lg:flex-row lg:gap-[24px]">
+            {i > 0 && <img src="/figma/cust-x-icon.svg" alt="" className="size-[18px]" />}
+            <p className="whitespace-nowrap text-[18px] leading-[1.167] text-text-main lg:text-[20px]" dir="auto">
+              {item}
+            </p>
+          </span>
+        ))}
+      </div>
+      <CtaButton className="cursor-pointer rounded-full bg-primary px-[28px] py-[12px] text-[18px] font-bold leading-[1.167] text-white transition-transform hover:scale-105">
+        ספרו לי עוד
+      </CtaButton>
+    </Reveal>
+  )
+}
+
 export default function About() {
   return (
-    <section id="about" className="relative flex scroll-mt-[68px] flex-col items-center gap-[40px] overflow-hidden bg-[rgba(80,89,255,0.16)] px-[24px] py-[60px] lg:flex-row-reverse lg:justify-between lg:gap-[100px] lg:px-[200px] lg:py-[140px]">
+    <section id="about" className="relative scroll-mt-[68px] overflow-hidden bg-[rgba(80,89,255,0.16)]">
       <div className="bg-blob-blue pointer-events-none absolute -top-[300px] left-[45%] h-[1040px] w-[1490px] max-w-none" />
 
-      {/* media — right side on desktop (flex-row-reverse in RTL puts the first child left, so media renders second) */}
-      <Reveal className="z-10 flex w-full max-w-[600px] flex-col items-center justify-center gap-[28px] lg:gap-[32px]">
-        <div className="flex w-full flex-col items-center justify-center gap-[24px] text-center text-sub-black lg:gap-[32px]">
-          <h2 className="text-[30px] font-bold leading-[1.167] lg:text-[46px]" dir="rtl">
-            אנחנו הופכים כל אירוע
-            <br />
-            בארגון <span className="text-primary">לחוויה מיוחדת</span>
-          </h2>
-          <p className="text-[18px] leading-[1.25] lg:text-[22px]" dir="rtl">
-            <b>המטרה שלנו פשוטה: </b>
-            להעניק לעובדים שלכם חופש בחירה מוחלט מתוך אלפי מותגים ומתנות בכל רחבי הארץ. ב-Xtra תוכלו לשלוח מתנות
-            בלחיצת כפתור, לנהל תקציבים וליהנות מתזמון שליחה מראש. אנחנו כאן כדי לוודא שכל אחת ואחד בארגון ייהנו מהמתנה
-            שנתתם, ושאתם תיהנו משקט נפשי וליווי מקצועי צמוד.
-          </p>
-        </div>
-        <div className="flex flex-col items-center gap-[16px] py-[16px] lg:flex-row lg:gap-[24px] lg:py-[24px]">
-          {infoItems.map((item, i) => (
-            <span key={item} className="flex flex-col items-center gap-[16px] lg:flex-row lg:gap-[24px]">
-              {i > 0 && <img src="/figma/cust-x-icon.svg" alt="" className="size-[18px]" />}
-              <p className="whitespace-nowrap text-[18px] leading-[1.167] text-text-main lg:text-[20px]" dir="auto">
-                {item}
-              </p>
-            </span>
-          ))}
-        </div>
-        <CtaButton className="cursor-pointer rounded-full bg-primary px-[28px] py-[12px] text-[18px] font-bold leading-[1.167] text-white transition-transform hover:scale-105">
-          ספרו לי עוד
-        </CtaButton>
-      </Reveal>
+      {/* mobile — stacked */}
+      <div className="relative flex flex-col items-center gap-[40px] px-[24px] py-[60px] lg:hidden">
+        <AboutText />
+        <Reveal delay={150} className="z-10 mb-[90px] mt-[85px] w-full min-w-px">
+          <BlobVideo />
+        </Reveal>
+      </div>
 
-      <Reveal delay={150} className="z-10 mb-[90px] mt-[85px] w-full min-w-px lg:my-0 lg:flex-1">
-        <BlobVideo />
-      </Reveal>
+      {/* desktop — fixed 1920x758 Figma composition, scaled to any width
+          (flex-row-reverse in RTL puts the text left, media right — like the design) */}
+      <ScaleStage designWidth={1920} designHeight={758} className="hidden w-full lg:block">
+        <div className="relative flex h-[758px] w-[1920px] flex-row-reverse items-center justify-between gap-[100px] px-[200px]">
+          <AboutText />
+          <Reveal delay={150} className="z-10 w-full min-w-px flex-1">
+            <BlobVideo />
+          </Reveal>
+        </div>
+      </ScaleStage>
     </section>
   )
 }

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sips -c 560 1180 --cropOffset 1290 0 full-1180.png --out verify/bw-full.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight verify/bw-full.png)",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}
