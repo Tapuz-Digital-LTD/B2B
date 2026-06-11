@@ -14,14 +14,15 @@ const blobMask = {
 } as const
 
 /** Blob-masked video with a black outline that hugs the shape + red X.
- *  The stage canvas (700x831) includes the full blob, so nothing overflows onto neighbors. */
+ *  Canvas is the Figma frame (700x478); the blob bleeds beyond it into the section padding,
+ *  exactly like the design. Mobile compensates with margins so nothing overlaps text. */
 function BlobVideo() {
   return (
-    <ScaleStage designWidth={700} designHeight={831} className="mx-auto w-full max-w-[700px]">
-      <div dir="ltr" className="relative h-[831px] w-[700px]">
+    <ScaleStage designWidth={700} designHeight={478} className="mx-auto w-full max-w-[700px]">
+      <div dir="ltr" className="relative h-[478px] w-[700px]">
         {/* the video, clipped to the blob shape — drop the clip at public/videos/about.mp4 */}
         <div
-          className="absolute left-[-120px] top-0 h-[831px] w-[896px] overflow-hidden"
+          className="absolute left-[-120px] top-[-177px] h-[831px] w-[896px] overflow-hidden"
           style={{ ...blobMask, WebkitMaskPosition: '36.9px 0.4px', maskPosition: '36.9px 0.4px' }}
         >
           {/* crop framing derived from the Figma video fill (videoTransform) */}
@@ -37,7 +38,7 @@ function BlobVideo() {
           </video>
         </div>
         {/* black outline generated from the same mask — same geometry, so it always hugs the video */}
-        <div className="pointer-events-none absolute left-[-120px] top-0 h-[831px] w-[896px] overflow-hidden">
+        <div className="pointer-events-none absolute left-[-120px] top-[-177px] h-[831px] w-[896px] overflow-hidden">
           <img
             src="/figma/lp-about-outline.png"
             alt=""
@@ -49,7 +50,7 @@ function BlobVideo() {
         <img
           src="/figma/lp-about-x.svg"
           alt=""
-          className="animate-float absolute left-[590px] top-[488px] w-[116px] -rotate-[39.6deg]"
+          className="animate-float absolute left-[590px] top-[311px] w-[116px] -rotate-[39.6deg]"
         />
       </div>
     </ScaleStage>
@@ -58,7 +59,7 @@ function BlobVideo() {
 
 export default function About() {
   return (
-    <section className="relative flex flex-col items-center gap-[40px] overflow-hidden bg-[rgba(80,89,255,0.16)] px-[24px] py-[60px] lg:flex-row-reverse lg:justify-between lg:gap-[100px] lg:px-[200px] lg:py-[140px]">
+    <section id="about" className="relative flex scroll-mt-[68px] flex-col items-center gap-[40px] overflow-hidden bg-[rgba(80,89,255,0.16)] px-[24px] py-[60px] lg:flex-row-reverse lg:justify-between lg:gap-[100px] lg:px-[200px] lg:py-[140px]">
       <div className="bg-blob-blue pointer-events-none absolute -top-[300px] left-[45%] h-[1040px] w-[1490px] max-w-none" />
 
       {/* media — right side on desktop (flex-row-reverse in RTL puts the first child left, so media renders second) */}
@@ -91,7 +92,7 @@ export default function About() {
         </CtaButton>
       </Reveal>
 
-      <Reveal delay={150} className="z-10 w-full min-w-px lg:flex-1">
+      <Reveal delay={150} className="z-10 mb-[90px] mt-[85px] w-full min-w-px lg:my-0 lg:flex-1">
         <BlobVideo />
       </Reveal>
     </section>

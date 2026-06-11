@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/((?!figma/|videos/|fonts/|assets/).*)", "destination": "/index.html" }]
+}

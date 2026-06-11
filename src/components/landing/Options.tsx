@@ -21,7 +21,7 @@ const cards = [
 /** "בוחרים את הדרך שמתאימה לכם" — the two product options. */
 export default function Options() {
   return (
-    <section className="relative px-[16px] py-[60px] lg:px-[200px] lg:py-[120px]">
+    <section id="options" className="relative scroll-mt-[68px] px-[16px] py-[60px] lg:px-[200px] lg:py-[120px]">
       <div className="bg-blob-blue pointer-events-none absolute -top-[200px] left-[50%] -z-10 h-[1180px] w-[1530px] max-w-none" />
 
       <div className="mx-auto flex w-full max-w-[1520px] flex-col items-center gap-[40px] rounded-[24px] bg-white px-[16px] py-[60px] shadow-[0_30px_80px_rgba(80,89,255,0.08)] lg:gap-[80px] lg:rounded-[40px] lg:px-[120px] lg:py-[120px]">

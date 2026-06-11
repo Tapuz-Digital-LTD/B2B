@@ -7,19 +7,19 @@ const STEP_DURATION_MS = 3500
 const steps = [
   {
     title: 'טוענים כסף לארנק',
-    desc: 'תיאור השלב',
+    desc: 'המעסיק טוען את המתנה ישירות לארנק הדיגיטלי שלך',
     icon: '/figma/sys-icon-gift-white.svg',
     iconActive: '/figma/sys-icon-gift.svg',
   },
   {
     title: 'בוחרים מתנה ממגוון האפשרויות',
-    desc: 'תיאור השלב',
+    desc: 'מעל 3,500 בתי עסק, מותגים וחוויות לבחירתך',
     icon: '/figma/sys-icon-heart.svg',
     iconActive: '/figma/sys-icon-heart-red.svg',
   },
   {
     title: 'מממשים ונהנים!',
-    desc: 'תיאור השלב',
+    desc: 'מממשים בקופה או אונליין — בלי הגבלת זמן',
     icon: '/figma/sys-icon-party.svg',
     iconActive: '/figma/sys-icon-party-red.svg',
   },

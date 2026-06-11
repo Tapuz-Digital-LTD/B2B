@@ -4,20 +4,20 @@ import CtaButton from './CtaButton'
 
 const menuItems = [
   { label: 'בית', to: '/' },
-  { label: 'אתר בחירה', to: '#' },
+  { label: 'אתר בחירה', to: '/#options' },
   { label: 'ארנק אקסטרה', to: '/digital-wallet' },
-  { label: 'אודותנו', to: '#' },
+  { label: 'אודותנו', to: '/#about' },
 ]
 
 function MenuLink({ item, className, onClick }: { item: (typeof menuItems)[number]; className: string; onClick?: () => void }) {
-  if (item.to === '#') {
+  const { pathname } = useLocation()
+  if (item.to.includes('#')) {
     return (
-      <a href="#" onClick={onClick} className={`${className} text-text-main`}>
+      <NavLink to={item.to} onClick={onClick} className={`${className} text-text-main`}>
         {item.label}
-      </a>
+      </NavLink>
     )
   }
-  const { pathname } = useLocation()
   const active = pathname === item.to
   return (
     <NavLink to={item.to} onClick={onClick} className={`${className} ${active ? 'font-bold text-primary' : 'text-text-main'}`}>

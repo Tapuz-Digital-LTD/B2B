@@ -7,11 +7,11 @@ function GiftAlert({ className = '' }: { className?: string }) {
     <div className={`relative ${className}`} dir="rtl">
       <div className="relative flex items-center gap-[16px] rounded-[8px] border border-[rgba(80,89,255,0.08)] bg-white py-[4px] pe-[24px] ps-[4px] drop-shadow-[0_8.3px_11px_rgba(0,0,0,0.08)]">
         <div className="relative size-[52px] shrink-0 overflow-visible rounded-[3px] bg-[rgba(255,212,70,0.5)]">
-          <img src="/figma/lp-gift-matzah.png" alt="" className="absolute -left-[8px] -top-[10px] w-[68px] max-w-none" />
+          <img src="/figma/lp-gifts.png" alt="" className="absolute -left-[6px] -top-[12px] w-[64px] max-w-none drop-shadow-[0_6px_10px_rgba(0,0,0,0.12)]" />
         </div>
         <div className="flex flex-col items-start justify-center gap-[2px] text-text-main">
           <p className="text-[20px] font-bold leading-[1.4]" dir="auto">
-            חג פסח שמח!
+            יש לך מתנה חדשה!
           </p>
           <p className="text-[14px] leading-[1.4]" dir="auto">
             קיבלת מתנה מהמעסיק
@@ -49,10 +49,10 @@ export default function HeroLanding() {
           <div className="relative h-[700px] w-[351px]">
             {/* image layer (physical coords) */}
             <div dir="ltr" className="absolute inset-0 overflow-clip">
-              {/* hanging matzah on its string */}
-              <div className="animate-sway absolute left-[-48px] top-[-85px] h-[655px] w-[232px]">
-                <div className="absolute left-[114px] top-0 h-[331px] w-[2px] bg-[#d9b991]" />
-                <img src="/figma/lp-matzah-big.png" alt="" className="absolute left-0 top-[304px] w-[232px]" />
+              {/* hanging gift on its string */}
+              <div className="animate-sway absolute left-[-30px] top-[-85px] h-[620px] w-[200px]">
+                <div className="absolute left-[96px] top-0 h-[331px] w-[2px] bg-[#e3a6b8]" />
+                <img src="/figma/lp-gifts.png" alt="" className="absolute left-[6px] top-[318px] w-[180px] drop-shadow-[0_24px_41px_rgba(80,89,255,0.2)]" />
               </div>
               {/* girl — centered, flipped like the design */}
               <div className="absolute bottom-[-34px] left-[calc(50%+0.5px)] h-[408px] w-[254px] -translate-x-1/2 -scale-x-100 overflow-hidden">
@@ -66,9 +66,9 @@ export default function HeroLanding() {
               <Pop delay={0.3} className="left-[227px] top-[476px] w-[140px]">
                 <img src="/figma/lp-x-big.svg" alt="" className="w-full" />
               </Pop>
-              {/* gifts */}
-              <Pop delay={0.45} drift={-2} className="right-[29px] top-[326px] w-[47px]">
-                <img src="/figma/lp-gifts.png" alt="" className="w-full" />
+              {/* birthday cake */}
+              <Pop delay={0.45} drift={-2} className="right-[26px] top-[318px] w-[56px]">
+                <img src="/figma/hero-cake.png" alt="" className="w-full rotate-[10deg]" />
               </Pop>
               {/* gift alert */}
               <GiftAlert className="animate-fade-up absolute left-1/2 top-[584px] w-[293px] -translate-x-1/2 [animation-delay:600ms]" />
@@ -78,7 +78,7 @@ export default function HeroLanding() {
             <div className="animate-fade-up absolute inset-x-0 top-[73px] flex flex-col items-center gap-[20px] px-[24px]">
               <div className="flex flex-col items-center gap-[14px]">
                 <p className="whitespace-nowrap text-[22px] font-bold leading-[1.167] text-text-main" dir="auto">
-                  בפסח הזה כולם יהיו
+                  אצלכם בארגון כולם יהיו
                 </p>
                 <div className="flex items-center justify-center gap-[12px]">
                   <img src="/figma/s4-xtra-red.svg" alt="XTRA" className="h-[20px] w-auto" />
@@ -108,7 +108,7 @@ export default function HeroLanding() {
             <div className="absolute right-[85px] top-1/2 flex w-[560px] -translate-y-1/2 flex-col items-start justify-center gap-[28px] [&>*]:animate-fade-up [&>*:nth-child(2)]:[animation-delay:150ms] [&>*:nth-child(3)]:[animation-delay:300ms]">
               <div className="flex flex-col items-start justify-center gap-[14px]">
                 <p className="whitespace-nowrap text-right text-[54px] font-bold leading-[1.167] tracking-[-1px] text-text-main" dir="auto">
-                  בפסח הזה כולם יהיו
+                  אצלכם בארגון כולם יהיו
                 </p>
                 <div className="flex items-center justify-center gap-[16px]">
                   <img src="/figma/s4-xtra-red.svg" alt="XTRA" className="h-[34px] w-auto" />
@@ -131,10 +131,10 @@ export default function HeroLanding() {
 
             {/* image — left side */}
             <div dir="ltr" className="absolute -left-px -top-px h-[700px] w-[1060px] overflow-clip">
-              {/* hanging matzah, swaying on its string */}
-              <div className="animate-sway absolute left-[42px] -top-[2px] h-[652px] w-[232px]">
-                <div className="absolute left-[113px] top-0 h-[300px] w-[2.5px] bg-[#d9b991]" />
-                <img src="/figma/lp-matzah-big.png" alt="" className="absolute left-0 top-[301px] w-[232px]" />
+              {/* hanging gift, swaying on its string */}
+              <div className="animate-sway absolute left-[52px] -top-[2px] h-[640px] w-[210px]">
+                <div className="absolute left-[104px] top-0 h-[310px] w-[2.5px] bg-[#e3a6b8]" />
+                <img src="/figma/lp-gifts.png" alt="" className="absolute left-[5px] top-[312px] w-[200px] drop-shadow-[0_24px_41px_rgba(80,89,255,0.2)]" />
               </div>
               {/* girl with phone */}
               <div className="absolute bottom-[-57px] left-[199px] h-[691px] w-[430px] -scale-x-100 overflow-hidden">
@@ -154,8 +154,8 @@ export default function HeroLanding() {
               <Pop delay={0.55} className="left-[813px] top-[453px] w-[18px]">
                 <img src="/figma/lp-dot.svg" alt="" className="w-full" />
               </Pop>
-              <Pop delay={0.5} drift={-2.8} className="right-[212px] top-[9px] w-[86px]">
-                <img src="/figma/lp-gifts.png" alt="" className="w-full" />
+              <Pop delay={0.5} drift={-2.8} className="right-[208px] top-[6px] w-[92px]">
+                <img src="/figma/hero-cake.png" alt="" className="w-full rotate-[10deg]" />
               </Pop>
               <GiftAlert className="animate-fade-up absolute left-[652px] top-[225px] w-[277px] [animation-delay:700ms]" />
             </div>
