@@ -5,4 +5,13 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      // one HTML per route so link previews (WhatsApp OG) differ per page
+      input: {
+        main: 'index.html',
+        wallet: 'digital-wallet.html',
+      },
+    },
+  },
 })
