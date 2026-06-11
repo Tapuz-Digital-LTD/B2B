@@ -4,6 +4,7 @@ import TopBar from './components/TopBar'
 import Footer from './components/Footer'
 import LandingPage from './pages/LandingPage'
 import WalletPage from './pages/WalletPage'
+import CatalogPage from './pages/CatalogPage'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -27,6 +28,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/digital-wallet" element={<WalletPage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
         </Routes>
         <Footer />
       </div>

@@ -38,7 +38,7 @@ export function GiftCardRotator() {
 }
 
 /** 3x3 brand tile mosaic with floating popcorn / plane / gift-card (physical coords → dir ltr). */
-function TileGrid() {
+export function TileGrid() {
   return (
     <div dir="ltr" className="relative mx-auto grid w-full max-w-[760px] grid-cols-2 gap-[12px] lg:grid-cols-3 lg:gap-[16px]">
       <div className="relative order-2 aspect-[242/163] lg:order-1">

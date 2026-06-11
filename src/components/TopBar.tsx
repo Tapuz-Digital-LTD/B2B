@@ -6,6 +6,7 @@ const menuItems = [
   { label: 'בית', to: '/' },
   { label: 'אתר בחירה', to: '/#options' },
   { label: 'ארנק אקסטרה', to: '/digital-wallet' },
+  { label: 'קטלוג מוצרים', to: '/catalog' },
   { label: 'אודותנו', to: '/#about' },
 ]
 

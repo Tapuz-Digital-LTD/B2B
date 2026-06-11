@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/digital-wallet", "destination": "/digital-wallet.html" },
-    { "source": "/((?!figma/|videos/|fonts/|assets/|.*\\.).*)", "destination": "/index.html" }
+    { "source": "/catalog", "destination": "/catalog.html" },
+    { "source": "/((?!api/|figma/|videos/|fonts/|assets/|.*\\.).*)", "destination": "/index.html" }
   ]
 }

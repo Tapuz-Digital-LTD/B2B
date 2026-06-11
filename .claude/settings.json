@@ -3,7 +3,24 @@
     "allow": [
       "Bash(sips -c 560 1180 --cropOffset 1290 0 full-1180.png --out verify/bw-full.png)",
       "Bash(sips -g pixelWidth -g pixelHeight verify/bw-full.png)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(vercel --version)",
+      "Bash(npm run *)",
+      "Bash(vercel)",
+      "Bash(vercel inspect *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" https://xtra-landing-bkckq6mbx-tomersan1-2070s-projects.vercel.app/)",
+      "Bash(xargs ls -la)",
+      "Read(//Users/macbookpro/.claude/skills/grill-with-docs/**)",
+      "Read(//tmp/**)",
+      "Read(//private/tmp/**)",
+      "Bash(mkdir -p /Users/macbookpro/xtra-landing/public/icons3d)",
+      "Bash(curl -sf __TRACKED_VAR__/Fork%20and%20knife/3D/fork_and_knife_3d.png -o restaurant.png)",
+      "Bash(curl -sf __TRACKED_VAR__/Hot%20beverage/3D/hot_beverage_3d.png -o cafe.png)",
+      "Bash(curl -sf __TRACKED_VAR__/Pizza/3D/pizza_3d.png -o pizza.png)",
+      "Bash(curl -sf __TRACKED_VAR__/Coat/3D/coat_3d.png -o fashion.png)",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(xargs kill)",
+      "WebSearch"
     ]
   }
 }
